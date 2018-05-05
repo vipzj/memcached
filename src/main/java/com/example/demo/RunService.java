@@ -22,7 +22,7 @@ public class RunService {
     @Autowired
     private XMemcachedClientBuilder xMemcachedClientBuilder;
 
-    private AtomicInteger counts;
+    private AtomicInteger counts = new AtomicInteger();
 
 
     @PostConstruct
