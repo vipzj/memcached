@@ -26,7 +26,7 @@ public class RunService {
 
 
     @PostConstruct
-    public void init() throws IOException {
+    public void init() throws Exception {
 
         MemcachedClient client = xMemcachedClientBuilder.build();
 
@@ -45,6 +45,8 @@ public class RunService {
                 }
             });
         }
+
+        executorService.invokeAny(tasks);
 
         System.out.println(counts.get());
     }
