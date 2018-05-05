@@ -30,7 +30,7 @@ public class RunService {
 
         MemcachedClient client = xMemcachedClientBuilder.build();
 
-        int c = 100;
+        int c = 10000;
 
         ExecutorService executorService = Executors.newFixedThreadPool(c);
 
@@ -46,7 +46,7 @@ public class RunService {
             });
         }
 
-        executorService.invokeAny(tasks);
+        executorService.invokeAll(tasks);
 
         System.out.println(counts.get());
     }
