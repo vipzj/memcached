@@ -14,6 +14,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class RunService {
@@ -21,6 +22,7 @@ public class RunService {
     @Autowired
     private XMemcachedClientBuilder xMemcachedClientBuilder;
 
+    private AtomicInteger counts;
 
 
     @PostConstruct
@@ -38,15 +40,13 @@ public class RunService {
             tasks.add(new Callable<String>() {
                 @Override
                 public String call() throws Exception {
-
-                    client.get("");
+                    client.set("counts",36000,counts.addAndGet(1));
                     return "";
                 }
             });
         }
 
-
-        System.out.println(xMemcachedClientBuilder);
+        System.out.println(counts.get());
     }
 
 }
